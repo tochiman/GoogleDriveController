@@ -9,9 +9,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	path string
+	query string
+	folder string
+	// extention string
+	paging string
+)
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "gdrive",
+	Use:   "gdc",
 	Short: "You can control your Google Drive with CLI commands",
 	Long: `You can control your Google Drive with CLI commands.
 

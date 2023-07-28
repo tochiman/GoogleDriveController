@@ -12,8 +12,8 @@ import (
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print gdrive version information",
-	Long: `Print gdrive version information`,
+	Short: "Print GoogleDriveController version information",
+	Long: `Print GoogleDriveController version information`,
 	Run: func(cmd *cobra.Command, args []string) {
 		version := os.Getenv("VERSION")
 		fmt.Println(version)

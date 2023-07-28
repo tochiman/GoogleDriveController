@@ -14,8 +14,6 @@ import (
 	"github.com/tochiman/DriveManegement/exe"
 )
 
-var query string
-
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
@@ -29,23 +27,21 @@ var listCmd = &cobra.Command{
 			fmt.Printf("Unable to retrieve Drive client: %v", err)
 		}
 
-		var paging string
 
 		for {
-			q := "name contains '" + query + "'" 
 			r, err := srv.Files.List().PageSize(1000).
-			Fields("nextPageToken, files(name, fileExtension, size)").
+			Fields("nextPageToken, files(id, name, fileExtension, size, mimeType)").
 			Context(ctx).
-			Q(q).Do()
+			Q(fmt.Sprintf("name contains '%s'", query)).Do()
 			if err != nil {
 				fmt.Printf("Unable to retrieve files: %v", err)
 			}
 
-			table := clitable.New([]string{"Name", "Extention", "Size"})
+			table := clitable.New([]string{"ID","Name", "Extention", "Size"})
 			for _, f := range r.Files {
 				if f.FileExtension == "" { f.FileExtension = "dir" }
 				size := exe.Conversion(float64(f.Size))
-				table.AddRow(map[string]interface{}{"Name": f.Name, "Extention": f.FileExtension, "Size": size})
+				table.AddRow(map[string]interface{}{"ID":f.Id, "Name": f.Name, "Extention": f.FileExtension, "Size": size})
 			}
 			table.Print()
 
@@ -62,6 +58,7 @@ var listCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(listCmd)
 	listCmd.Flags().StringVarP(&query, "query", "q","", "This flag specifies the file name")
+	// listCmd.Flags().StringVarP(&extention, "extention", "e", "", "Specify file-Extention type when downloading. ")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

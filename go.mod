@@ -3,6 +3,7 @@ module github.com/tochiman/DriveManegement
 go 1.20
 
 require (
+	github.com/cheggaaa/pb v1.0.29
 	github.com/crackcomm/go-clitable v0.0.0-20221128132333-2488a876f62c
 	github.com/joho/godotenv v1.5.1
 	github.com/spf13/cobra v1.7.0
@@ -20,7 +21,6 @@ require (
 	github.com/googleapis/gax-go/v2 v2.8.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	github.com/schollz/progressbar v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
